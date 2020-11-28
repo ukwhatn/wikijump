@@ -27,6 +27,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.php-fpm.tls=true
       - traefik.http.routers.php-fpm.rule=Method(`GET`, `POST`, `HEAD`, `PUT`, `PATCH`, `DELETE`)  # Poor man's default route
+      - traefik.http.middlewares.www.redirectregex.regex=^https://wikijump.test/(.*)
+      - traefik.http.middlewares.www.redirectregex.replacement=https://www.wikijump.test/$${1}
   reverse-proxy:
     image: traefik:v2.3
     command:
